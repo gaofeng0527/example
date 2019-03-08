@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.chapter.controller.HomeControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-02-01T03:13:16" hostname="USER-20160411EX" time="0.098">
+  <properties/>
+  <testcase name="testHomePage" classname="com.chapter.controller.HomeControllerTest" time="0.096"/>
+  <testcase name="userTeset" classname="com.chapter.controller.HomeControllerTest" time="0.001"/>
+  <system-out><![CDATA[
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /hello
+       Parameters = {}
+          Headers = {}
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.chapter.controller.HomeController
+           Method = public java.lang.String com.chapter.controller.HomeController.hello(org.springframework.ui.Model)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = home
+             View = null
+        Attribute = uname
+            value = 高峰
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = {Accept-Language=[en]}
+     Content type = null
+             Body = 
+    Forwarded URL = /WEB-INF/views/home.jsp
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+二月 01, 2019 11:13:16 上午 org.hibernate.validator.internal.util.Version <clinit>
+INFO: HV000001: Hibernate Validator 6.0.2.Final
+]]></system-err>
+</testsuite>

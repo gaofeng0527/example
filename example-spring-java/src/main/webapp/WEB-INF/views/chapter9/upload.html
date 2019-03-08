@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload</title>
+    <style>
+        #box-1{
+            width: 200px;
+            height: 200px;
+            border:1px solid gray;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="box-1">
+    <img src="" alt="" id="headImage">
+</div>
+<br>
+<div id="box-2">
+    <form th:action="@{/home/upload}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="headfile"><br>
+        <button type="submit">提交</button>
+    </form>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        //当文件选择框内容变化时执行
+        $('#headfile').change(function () {
+            //获取input file的files文件数组;
+            //$('#filed')获取的是jQuery对象，.get(0)转为原生对象;
+            //这边默认只能选一个，但是存放形式仍然是数组，所以取第一个元素使用[0];
+            var file = $("#headfile").get(0).files[0];
+
+            //创建读取对象
+            var reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            //读取成功调用回调函数
+            reader.onload = function (ev) {
+                //图片预览
+                $("#headImage").get(0).src = ev.target.result;
+            }
+        });
+
+        //隐藏文件选择框
+        $("#headfile").hide();
+
+        //点击头像时显示文件选择
+        $("#box-1").bind('click',function () {
+            $("#headfile").click();
+        })
+    });
+</script>
+</body>
+</html>

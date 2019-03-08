@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.peak.config.CDPlayTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-02-01T03:13:17" hostname="USER-20160411EX" time="0.001">
+  <properties/>
+  <testcase name="cdShouldNotBeNull" classname="com.peak.config.CDPlayTest" time="0.001"/>
+  <system-out><![CDATA[我是个老家伙！
+你好，欢迎来到地球
+save person success
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

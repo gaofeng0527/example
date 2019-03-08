@@ -1,0 +1,69 @@
+plugins {
+    id 'war'
+    id 'java'
+    id 'org.akhikhl.gretty' version '2.0.0'
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = ''
+    servletContainer = 'tomcat8'
+
+    inplaceMode = 'hard'
+    debugSuspend = false
+    managedClassReload = true
+    recompileOnSourceChange = true
+
+    // 升级 gretty 自带的 springloaded
+    jvmArgs = ['-javaagent:springloaded-1.2.8.RELEASE.jar', '-noverify']
+}
+
+group 'example.spring'
+version '1.0-SNAPSHOT'
+
+/**
+ * 设置jdk版本
+ */
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'utf-8'
+
+//////maven依赖////////////////
+repositories {
+    mavenLocal()//本地依赖
+    mavenCentral()//远程
+}
+
+//直接声明spring的版本
+ext {
+    spring = '5.0.2.RELEASE'
+}
+
+//多个版本可以声明在一个数组中
+ext.versions = [
+        servlet  : '4.0.0',
+        fastjson : '1.2.41',
+        thymeleaf: '3.0.9.RELEASE'
+]
+
+dependencies {
+    compile(
+            "org.springframework:spring-webmvc:$spring",
+            "org.springframework:spring-context-support:$spring",
+            "org.thymeleaf:thymeleaf-spring5:${versions.thymeleaf}",
+            "com.alibaba:fastjson:${versions.fastjson}",
+            "org.projectlombok:lombok:1.18.4"
+    )
+    compileOnly(
+            "javax.servlet:javax.servlet-api:${versions.servlet}"
+    )
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile("org.springframework:spring-test:$spring")
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
+}

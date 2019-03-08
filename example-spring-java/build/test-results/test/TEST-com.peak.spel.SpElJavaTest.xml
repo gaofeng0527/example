@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.peak.spel.SpElJavaTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-02-01T03:13:17" hostname="USER-20160411EX" time="0.005">
+  <properties/>
+  <testcase name="spelTest" classname="com.peak.spel.SpElJavaTest" time="0.004"/>
+  <testcase name="randomTest" classname="com.peak.spel.SpElJavaTest" time="0.001"/>
+  <system-out><![CDATA[name: Administrator age: 27
+null
+4271553
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

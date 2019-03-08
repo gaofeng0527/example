@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REGISTER</title>
+</head>
+<body>
+<form action="/register" th:action="@{/register}" method="post" enctype="multipart/form-data">
+    user:<input type="text" name="uName"><br>
+    pwd:<input type="password" name="password"><br>
+    email:<input type="email" name="email"><br>
+    head:<input type="file" name="headPath"/><br>
+    phone:<input type="text" name="phone"><br>
+    <button type="submit">提交</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UserForm</title>
+</head>
+<body>
+<h1>User Register</h1>
+<form th:action="@{/home/user/register}" method="post" enctype="multipart/form-data">
+    firstName: <input type="text" name="firstName"><br>
+    lastName: <input type="text" name="lastName"><br>
+    userName <input type="text" name="userName"><br>
+    <button type="submit"> Register </button>
+</form>
+</body>
+</html>

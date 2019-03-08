@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.chapter.controller.SpittleControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-02-01T03:13:16" hostname="USER-20160411EX" time="0.015">
+  <properties/>
+  <testcase name="findSpittles" classname="com.chapter.controller.SpittleControllerTest" time="0.002"/>
+  <testcase name="registerTest" classname="com.chapter.controller.SpittleControllerTest" time="0.002"/>
+  <testcase name="spittlesTest" classname="com.chapter.controller.SpittleControllerTest" time="0.009"/>
+  <system-out><![CDATA[
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /spittles
+       Parameters = {}
+          Headers = {}
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.chapter.controller.SpittleController
+           Method = public java.lang.String com.chapter.controller.SpittleController.spittles(org.springframework.ui.Model)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = spittle/spittles
+             View = null
+        Attribute = slist
+            value = [Spittle(id=1, message=spittle1, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=2, message=spittle2, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=3, message=spittle3, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=4, message=spittle4, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=5, message=spittle5, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=6, message=spittle6, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=7, message=spittle7, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=8, message=spittle8, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=9, message=spittle9, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null), Spittle(id=10, message=spittle10, time=Fri Feb 01 11:13:16 CST 2019, latitude=null, longitude=null)]
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = {Accept-Language=[en]}
+     Content type = null
+             Body = 
+    Forwarded URL = /WEB-INF/views/spittle/spittles.jsp
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

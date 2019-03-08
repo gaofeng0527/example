@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.chapter7.controller.HomeControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-02-01T03:13:16" hostname="USER-20160411EX" time="0.512">
+  <properties/>
+  <testcase name="indexTest" classname="com.chapter7.controller.HomeControllerTest" time="0.512"/>
+  <system-out><![CDATA[
+MockHttpServletRequest:
+      HTTP Method = GET
+      Request URI = /chapter7/home/index
+       Parameters = {}
+          Headers = {}
+             Body = <no character encoding set>
+    Session Attrs = {}
+
+Handler:
+             Type = com.chapter7.controller.HomeController
+           Method = public java.lang.String com.chapter7.controller.HomeController.index(org.springframework.ui.Model)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = null
+
+ModelAndView:
+        View name = chapter7/index
+             View = null
+        Attribute = chapter
+            value = 第7章 Spring MVC的高级技术
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 200
+    Error message = null
+          Headers = {Accept-Language=[en], Content-Type=[text/html;charset=UTF-8]}
+     Content type = text/html;charset=UTF-8
+             Body = <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>第7章 Spring MVC的高级技术</h1>
+</body>
+</html>
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

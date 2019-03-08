@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1.该配置主要用于配置Spring-Security，因此用到的security命名空间比较多，所以把security设置为默认的命名空间，而beans需要显示配置例如：<beans:beans> -->
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+    <!-- 有些资源不需要验证也可以访问，就可以按照下面的方式配置 -->
+    <http pattern="/static/**" security="none"/>
+    <http pattern="/loginPage" security="none"/>
+
+    <http>
+        <!--
+            1.intercept-url 可以配置请求路径需要什么样的权限访问
+                1.1 pattern 配置请求路径，可以借用ant语法
+                1.2 access 配置角色权限 hasRole('USER')即ROLE_USER，多个的话可以用逗号隔开
+                1.3 method 可以配置对什么类型的请求进行拦截
+                1.4 可以在http标签下配置多个intercept-url
+             这句话的意思是：拦截所有GET请求，并验证用户身份，只允许拥有USER角色的用户通过
+         -->
+        <intercept-url pattern="/**" access="hasRole('USER')"/>
+        <!--
+          1.login-page  访问登录页面
+          2.login-processing-url  发送post登录请求，默认可以不写，会访问spring-security提供的/login路径
+          3.default-target-url  登录成功后，默认跳转页面
+          4.authentication-failure-url 登录失败发送的请求
+          5.username-parameter 登录页面中用户名输入框对应的name属性
+          6.password-parameter 登录页面中密码输入框对应的name属性
+          7.authentication-success-handler-ref 适用场景，用户访问相同的登录页面，登录成功后，根据角色的不同，呈现不同的页面，同样配置了该属性
+            default-targete-url就失效了
+        -->
+        <form-login login-page="/loginPage"
+                    authentication-success-handler-ref="loginSuccessHandler"
+                    default-target-url="/public/hello"
+                    authentication-failure-url="/loginPage?error"
+                    username-parameter="username"
+                    password-parameter="password"/>
+
+        <!-- 如果没有权限，跳转页面 -->
+        <access-denied-handler error-page="/deny"/>
+        <!--
+            1.注销 默认请求路径为：/logout(spring-security 自带的注销处理)，可以通过logout-url配置自己的处理请求
+            2.logout-success-url 成功注销页面
+         -->
+        <logout logout-url="/logout" logout-success-url="/loginPage?logout"/>
+        <csrf disabled="true"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <!--
+                    1.默认把用户信息配置到内存中
+                    2.密码以{noop}为前缀，表示DelegatingPasswordEncode，大概意思就是用明文的方式，方便测试阅读
+                -->
+                <user name="admin" password="{noop}admin" authorities="ROLE_USER,ROLE_ADMIN"/>
+                <user name="edu" password="{noop}edu" authorities="ROLE_USER"/>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="loginSuccessHandler" class="com.spring.security.LoginSuccessHandler"/>
+</beans:beans>

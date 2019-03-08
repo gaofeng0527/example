@@ -1,0 +1,6 @@
+rootProject.name = 'example'
+include 'example-spring-xml'
+include 'example-spring-java'
+include 'example-spring-security'
+include 'example-spring-template'
+
