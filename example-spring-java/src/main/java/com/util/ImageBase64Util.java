@@ -13,7 +13,7 @@ import java.io.IOException;
 public class ImageBase64Util {
 
     public static void main(String[] args) throws IOException {
-        String str = imageToBase64String("F:\\a\\36.jpg");
+        String str = imageToBase64String("F:\\a\\image126.gif");
         System.out.println(str);
 
         //saveBase64ImageStringToImage("/Users/Biao/Desktop", "y", str);
