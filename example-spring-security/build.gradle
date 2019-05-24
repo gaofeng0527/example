@@ -59,7 +59,12 @@ dependencies {
             "org.springframework.security:spring-security-config:${versions.springSecurity}",
             "org.thymeleaf:thymeleaf-spring5:${versions.thymeleaf}",
             "com.alibaba:fastjson:${versions.fastjson}",
-            "org.projectlombok:lombok:1.18.4"
+            "org.projectlombok:lombok:1.18.4",
+            "commons-codec:commons-codec:1.10",
+            "commons-io:commons-io:2.5",
+            "org.jsoup:jsoup:1.7.1",
+            "mysql:mysql-connector-java:5.1.21",
+            'com.zaxxer:HikariCP:2.4.5'
     )
     // https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5
     //配合thymeleaf 使用，如果前端不是用的thymeleaf，不用加这个jar

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>富文本框</title>
+    <script th:src="@{/static/lib/tinymce/tinymce.min.js}"></script>
+    <link href="/static/lib/fileupload/css/iconfont.css" th:href="@{/static/lib/fileupload/css/iconfont.css}" rel="stylesheet" type="text/css"/>
+    <link href="/static/lib/fileupload/css/fileUpload.css" th:href="@{/static/lib/fileupload/css/fileUpload.css}" rel="stylesheet" type="text/css">
+
+
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" th:href="@{/static/lib/jqueryrmodal/dist/rmodal-no-bootstrap.css}" type="text/css" />
+    <script type="text/javascript" th:src="@{/static/lib/jqueryrmodal/dist/rmodal.js}"></script>
+</head>
+
+<body>
+<div id="app1">
+    <h1>富文本框测试</h1>
+    <form method="post">
+        <textarea id="mytextarea">Hello, World!</textarea>
+        <div id="modal" class="modal">
+            <div class="modal-dialog animated">
+                <div class="modal-content">
+                    <div id="fileUploadContent" class="fileUploadContent"></div>
+                    <button id="newbtn" class="btn btn-default" type="button">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/lib/fileupload/js/fileUpload.js}"></script>
+<script>
+
+    var modal = new RModal(document.getElementById('modal'), {});
+
+    $().ready(function(){
+
+        $("body").on("click","#newbtn",function () {
+            $(".uploadBts").remove();
+            $(".box").remove();
+            modal.close();
+        })
+    });
+
+
+    tinymce.init({
+        selector: '#mytextarea',
+        language: "zh_CN",
+        plugins: [//advlist 高级列表，显示无序，有序的列表菜单
+            'advlist autolink link image lists charmap preview hr anchor pagebreak spellchecker',
+            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+            'save table contextmenu directionality emoticons template paste textcolor imagetools'
+        ],
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image file | print preview',
+        setup:function(editor){
+            editor.addButton('file',{
+                icon:'paste',
+                title:'上传附件',
+                onclick: function(){
+                    modal.open();
+                    fileUpload(editor);
+                }
+            })
+
+            function fileUpload(editor){
+                var wfu = new WpFileUpload("fileUploadContent");
+                wfu.initUpload({
+                    "uploadUrl":"http://localhost:8080/upload",//上传文件信息地址
+                    "autoCommit":true,
+                    "uploadFileParam":"file",
+                    "showSummerProgress":false,
+                    "showFileItemProgress":false,
+                    "beforeUpload":function(){
+                        console.log('准备上传');
+                        console.log(wfu.uploadFileParam);
+                    },
+                    "onUpload":function(){
+                        console.log(wfu.resultData);
+                        editor.insertContent(wfu.resultData)
+                        modal.close();
+                    }
+                });
+
+            }
+        },
+        automatic_uploads: true,
+        paste_as_text: true,
+        paste_data_images: true,
+        // 图片异步上传处理函数
+        images_upload_handler: function (blobInfo, success, failure) {
+            var xhr, formData;
+            xhr = new XMLHttpRequest();
+            xhr.dataType = "jsonp";
+            xhr.withCredentials = false;
+            xhr.open('POST', 'http://localhost:8080/upload-file');//第一个参数是请求方式，第二个参数是请求地址，我这里配置的是struts的action，如果是其他（PHP等）的可这样配置：xxx.php
+
+            xhr.onload = function () {
+                var json;
+                if (xhr.status !== 200) {
+                    failure('HTTP Error: ' + xhr.status);
+                    return;
+                }
+                json = JSON.parse(xhr.responseText);
+                if (!json || typeof json.location !== 'string') {
+                    failure('Invalid JSON: ' + xhr.responseText);
+                    return;
+                }
+                success(json.location);
+            };
+
+            formData = new FormData();
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+            xhr.send(formData);
+        }
+    });
+
+</script>
+</body>
+
+</html>

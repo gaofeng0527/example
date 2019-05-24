@@ -13,7 +13,7 @@
     <!-- 注解映射 -->
     <mvc:annotation-driven>
         <mvc:message-converters>
-            <!-- StringHttpMessageConverter 集成abstractHttpMessageConverter：当客户端发送请求报文到springmvc或者从springmvc响应报文到客户端
+            <!-- StringHttpMessageConverter 继承abstractHttpMessageConverter：当客户端发送请求报文到springmvc或者从springmvc响应报文到客户端
              中间会有一个报文转换成java对象的过程。如果不设置编码的话，会默认使用系统默认编码 'ISO-8859-1'-->
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8"/>
@@ -65,8 +65,12 @@
         <property name="cacheable" value="${thymeleafCacheable}"/>
     </bean>
 
+    <!-- 如果要在thymeleaf 页面中使用springsecurity方言的话，需要在引擎中注册springsecuritydialect -->
+    <bean id="springSecurityDialect" class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect"/>
+
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>
+        <property name="additionalDialects" ref="springSecurityDialect"/>
     </bean>
 
     <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">

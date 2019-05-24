@@ -1,8 +1,9 @@
-package com.util;
+package com.spring.utils;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,10 +21,12 @@ public class ImageBase64Util {
         String cookie = "JSESSIONID=9EEC4F4B23AD5329D7E6D6FE46E1758C; UM_distinctid=16624739e36108e-0452e83d0e143c-551e3f12-13c680-16624739e371ca; mantisId=87595516e5b24e0bb18bd965bdc41f9e; mantis7055=0569135e68124031b11f391d666e47ee@7055; Hm_lvt_8edc16894c9c51fbc1cdf95ce7e14a44=1546484510; CNZZDATA1261015652=1268210592-1538205349-null%7C1553063272; _tenant=default; Hm_lvt_c3f0b24e5f48f939831d8961d740e1c3=1550711988,1553063636; referer=\"http://www.edu-edu.com/\"; service=\"http://www.edu-edu.com/exam-admin/cas_security_check\"; 128_vq=15; Hm_lpvt_c3f0b24e5f48f939831d8961d740e1c3=1553067852";
         //String str = imageToBase64String("F:\\a\\image126.gif");
         //System.out.println(str);
+        String strs = "image.mp3";
+        System.out.println(FilenameUtils.getExtension(strs).toLowerCase());
 
         //saveBase64ImageStringToImage("/Users/Biao/Desktop", "y", str);
-        String str = imageToBase64ByUrl("http://www.edu-edu.com/exam-admin/home/my/admin/module/question/attaches/upload/file/7486/title?__id=WzahXMerfbTqBHT5BKx7.png", cookie);
-        System.out.println(str);
+        //String str = imageToBase64ByUrl("http://www.edu-edu.com/exam-admin/home/my/admin/module/question/attaches/","upload/file/7486/title?__id=WzahXMerfbTqBHT5BKx7.png", cookie);
+        //System.out.println(str);
     }
 
     /**
@@ -69,14 +72,17 @@ public class ImageBase64Util {
      *               Cookie:JSESSIONID=9EEC4F4B23AD5329D7E6D6FE46E1758C; UM_distinctid=16624739e36108e-0452e83d0e143c-551e3f12-13c680-16624739e371ca; mantisId=87595516e5b24e0bb18bd965bdc41f9e; mantis7055=0569135e68124031b11f391d666e47ee@7055; Hm_lvt_8edc16894c9c51fbc1cdf95ce7e14a44=1546484510; CNZZDATA1261015652=1268210592-1538205349-null%7C1553063272; _tenant=default; Hm_lvt_c3f0b24e5f48f939831d8961d740e1c3=1550711988,1553063636; referer="http://www.edu-edu.com/"; service="http://www.edu-edu.com/exam-admin/cas_security_check"; 128_vq=15; Hm_lpvt_c3f0b24e5f48f939831d8961d740e1c3=1553067852
      * @return
      */
-    public static String imageToBase64ByUrl(String imgUrl, String cookie) {
+    public static String imageToBase64ByUrl(String imgUrl, String src, String cookie) {
+
+
+
         String prefix = String.format("data:image/%s;base64,", FilenameUtils.getExtension(imgUrl).toLowerCase());
         URL url;
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
         ByteArrayOutputStream baos = null;
         try {
-            url = new URL(imgUrl);
+            url = new URL(imgUrl + src);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("Cookie", cookie);
@@ -119,8 +125,8 @@ public class ImageBase64Util {
                 urlConnection.disconnect();
             }
         }
-        System.out.println(prefix);
-        return imgUrl;
+        System.out.println(src);
+        return src;
 
     }
 }

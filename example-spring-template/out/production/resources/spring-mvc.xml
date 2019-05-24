@@ -53,7 +53,6 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 继承thymeleaf -->
     <!-- 集成 thymeleaf -->
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/page/"/>

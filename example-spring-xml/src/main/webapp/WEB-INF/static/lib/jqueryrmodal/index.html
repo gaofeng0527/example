@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>带动画效果的js模态对话框插件rmodal.js</title>
+	<link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css">
+
+	<link rel="stylesheet" href="dist/rmodal-no-bootstrap.css" type="text/css" />
+    	<script type="text/javascript" src="dist/rmodal.js"></script>
+    	<script type="text/javascript">
+        window.onload = function() {
+            var modal = new RModal(document.getElementById('modal'), {
+                beforeOpen: function(next) {
+                    console.log('beforeOpen');
+                    next();
+                }
+                , afterOpen: function() {
+                    console.log('opened');
+                }
+
+                , beforeClose: function(next) {
+                    console.log('beforeClose');
+                    next();
+                }
+                , afterClose: function() {
+                    console.log('closed');
+                }
+
+                // , content: 'Abracadabra'
+
+                // , bodyClass: 'modal-open'
+                // , dialogClass: 'modal-dialog-lg'
+                // , dialogOpenClass: 'fadeIn'
+                // , dialogCloseClass: 'fadeOut'
+
+                // , focus: true
+                // , focusElements: ['input.form-control', 'textarea', 'button.btn-primary']
+
+                // , escapeClose: true
+            });
+
+            document.addEventListener('keydown', function(ev) {
+                modal.keydown(ev);
+            }, false);
+
+            document.getElementById('showModal').addEventListener("click", function(ev) {
+                ev.preventDefault();
+                modal.open();
+            }, false);
+
+            window.modal = modal;
+        }
+    </script>
+</head>
+<body>
+
+
+		<div class="container">
+		        <div class="row">
+		            <div class="col-lg-12" style="text-align:center;padding:2em 0;">
+		                <h3>rmodal.js</h3>
+		                <ul>
+		                    <p>一个简单的对话框</p>
+		                    <p>纯js，不依赖其它库</p>
+		                    <p>支持的浏览器 (IE9+ +)</p>
+		                    <p>压缩和缩小时小于1.2 KB</p>
+		                    <p>Bootstrap和Animate.css友好</p>
+		                    <p>完全单元测试</p>
+		                    <p>支持CommonJS，AMD或全局变量</p>
+		                </ul>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-lg-12" style="text-align: center">
+		                <a href="#" id="showModal" class="btn btn-success">显示模态对话框</a>
+		            </div>
+		        </div>
+		    </div>
+
+	<!--模态窗口-->
+	<div id="modal" class="modal">
+        <div class="modal-dialog animated">
+            <div class="modal-content">
+                <form class="form-horizontal" method="get">
+                    <div class="modal-header">
+                        <strong>HELLO，我是rmodal.js话框！</strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dummyText" class="control-label col-xs-4">描述文本</label>
+                            <div class="input-group col-xs-7">
+                                <input type="text" name="dummyText" id="dummyText" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" onclick="modal.close();">取消</button>
+                        <button class="btn btn-primary" type="submit" onclick="modal.close();">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+	
+</body>
+</html>
